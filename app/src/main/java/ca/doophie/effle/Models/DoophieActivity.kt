@@ -29,8 +29,8 @@ abstract class DoophieActivity: AppCompatActivity() {
         overridePendingTransition( animIn, animOut )
     }
 
-    abstract class Dependency{
-        abstract val dependencies: HashMap<String, String>
+    interface Dependency{
+        val dependencies: HashMap<String, String>
     }
 
     private val activityPrefs: SharedPreferences

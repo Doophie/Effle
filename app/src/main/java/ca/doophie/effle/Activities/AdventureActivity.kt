@@ -61,7 +61,7 @@ class AdventureActivity: DoophieActivity(), ControllerManagerListener {
      */
 
     // the dependency class can collect all objects they need in the constructor
-    class AdventureDependency(characterName: String): Dependency() {
+    class AdventureDependency(characterName: String): Dependency {
 
         // the dependencies variable holds all the objects needed by this activity
         override val dependencies = HashMap<String, String>()

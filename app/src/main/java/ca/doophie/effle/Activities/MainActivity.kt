@@ -20,7 +20,7 @@ class MainActivity : DoophieActivity() {
         }
     }
 
-    class MainDependency: DoophieActivity.Dependency(){
+    class MainDependency: DoophieActivity.Dependency {
         override val dependencies = HashMap<String, String>()
     }
 
