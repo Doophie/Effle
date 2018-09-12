@@ -13,16 +13,12 @@ The project is on jcenter and can eaily be included through gradle by adding the
 implementation 'ca.doophie:doophrame:X.X.X'
 ```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 * [Maven](https://maven.apache.org/) - Dependency Management
 
 ## Author
 
-* **Quinn Fagan** - *Initial work* - [Doophie Git](https://github.com/Doophie)
+* **Quinn Fagan** - *All the work* - [Doophie Git](https://github.com/Doophie)
 
 ## License
 
