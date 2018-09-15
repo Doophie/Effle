@@ -1,8 +1,7 @@
 package ca.doophie.effle.Activities
 
 import android.os.Bundle
-import ca.doophie.doophrame.Models.DoophieActivityModel.DoophieActivity
-import ca.doophie.doophrame.UIObjects.Joystick
+import ca.doophie.doophrame.models.doophieActivityModel.DoophieActivity
 import ca.doophie.effle.Activities.AdventureActivity.AdventureDependency
 import ca.doophie.effle.R
 import kotlinx.android.synthetic.main.activity_main.*

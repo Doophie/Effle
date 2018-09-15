@@ -1,4 +1,4 @@
-package ca.doophie.doophrame.Models
+package ca.doophie.doophrame.models
 
 import java.io.*
 

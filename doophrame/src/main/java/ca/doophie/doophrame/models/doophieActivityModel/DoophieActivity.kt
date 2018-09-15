@@ -1,4 +1,4 @@
-package ca.doophie.doophrame.Models.DoophieActivityModel
+package ca.doophie.doophrame.models.doophieActivityModel
 
 import android.content.Intent
 import android.content.SharedPreferences

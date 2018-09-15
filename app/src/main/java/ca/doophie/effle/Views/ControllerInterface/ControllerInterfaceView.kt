@@ -3,7 +3,7 @@ package ca.doophie.effle.Views.ControllerInterface
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import ca.doophie.doophrame.Models.ViewModels.DoophieView
+import ca.doophie.doophrame.models.viewModels.DoophieView
 import ca.doophie.doophrame.UIObjects.Joystick
 import ca.doophie.doophrame.UIObjects.JoystickMovementCallbacks
 import ca.doophie.effle.R

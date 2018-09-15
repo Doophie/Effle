@@ -1,7 +1,7 @@
 package ca.doophie.effle.Activities
 
 import android.os.Bundle
-import ca.doophie.doophrame.Models.DoophieActivityModel.DoophieActivity
+import ca.doophie.doophrame.models.doophieActivityModel.DoophieActivity
 import ca.doophie.effle.R
 import ca.doophie.effle.Views.Character.CharacterManager
 import ca.doophie.effle.Views.ControllerInterface.ControllerManager

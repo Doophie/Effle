@@ -1,9 +1,8 @@
-package ca.doophie.doophrame.Models.ViewModels
+package ca.doophie.doophrame.models.viewModels
 
 import android.content.Context
 import android.view.ViewGroup
 import android.view.animation.Animation
-import android.widget.FrameLayout
 import java.lang.ref.WeakReference
 
 open class DoophieView(context: Context) {
