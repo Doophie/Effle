@@ -1,9 +1,11 @@
 package ca.doophie.doophrame.Models.ViewModels
 
 import android.content.Context
+import android.os.Bundle
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
+import ca.doophie.doophrame.Models.ObjectSerializer
 import java.lang.ref.WeakReference
 
 abstract class DoophieManager{
@@ -22,7 +24,6 @@ abstract class DoophieManager{
         doophieView = makeRootView(context)
         doophieView?.addToParent(view)
         if (withAnimation != -5) doophieView?.animation = AnimationUtils.loadAnimation(context, withAnimation)
-        view.addView(doophieView)
         doophieView?.animate()
         rootViewRef = WeakReference(doophieView?.rootView)
         doophieView?.setUpListeners()
@@ -33,7 +34,7 @@ abstract class DoophieManager{
     abstract fun makeRootView(context: Context): DoophieView
 
     fun popView(){
-        parentViewRef.get()?.removeView(doophieView)
+        parentViewRef.get()?.removeView(doophieView?.rootView)
         doophieView = null
     }
 }

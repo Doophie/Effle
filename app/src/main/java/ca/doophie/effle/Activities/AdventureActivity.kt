@@ -1,8 +1,7 @@
 package ca.doophie.effle.Activities
 
 import android.os.Bundle
-import android.view.MotionEvent
-import ca.doophie.effle.Models.DoophieActivity
+import ca.doophie.doophrame.Models.DoophieActivityModel.DoophieActivity
 import ca.doophie.effle.R
 import ca.doophie.effle.Views.Character.CharacterManager
 import ca.doophie.effle.Views.ControllerInterface.ControllerManager
@@ -14,7 +13,6 @@ class AdventureActivity: DoophieActivity(), ControllerManagerListener {
 
     // required variables for distinguishing this activity and its dependencies
     override val TAG: String = this::class.java.toString()
-    override val dependencyType = AdventureDependency::class.java
 
     // Information about the players character
     var characterName = ""
@@ -34,6 +32,8 @@ class AdventureActivity: DoophieActivity(), ControllerManagerListener {
 
         val controllerDependency = ControllerManagerDependency(screenWidth, screenHeight)
         ControllerManager(this, controllerDependency).fillView(controllerInterfaceFrame, applicationContext)
+
+        characterFrame.setOnClickListener { goToNewActivity() }
     }
 
     override fun onBackPressed() {
@@ -53,6 +53,7 @@ class AdventureActivity: DoophieActivity(), ControllerManagerListener {
         characterFrame.y += if (decider < 0) { if (decider == -1f) -5 else 5 } else 0
     }
 
+    private fun goToNewActivity() { }
 
     /***
      * Adventure dependencies

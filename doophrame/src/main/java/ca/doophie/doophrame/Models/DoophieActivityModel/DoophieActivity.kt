@@ -1,22 +1,31 @@
-package ca.doophie.doophrame.Models
+package ca.doophie.doophrame.Models.DoophieActivityModel
 
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Point
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
-abstract class DoophieActivity<DependencyType: DoophieActivity.Dependency>: AppCompatActivity() {
+abstract class DoophieActivity: AppCompatActivity() {
 
     abstract val TAG: String
 
     protected open val animIn: Int = 0
     protected open val animOut: Int = 0
 
-    protected fun switch(to: DoophieActivity<*>, dependencies: DependencyType){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    protected inline fun switch(to: DoophieActivity, dependencies: Dependency){
         val switchActivityIntent = Intent(this, to::class.java)
 
+        val depType = to::class.java.toString().split("Activity")[0]
+        if (dependencies::javaClass.toString().contains(depType)){
+            throw InvalidDependencyTypeException(dependencies::class.java.toString(), depType + "Dependency")
+        }
 
-        for ((k, v) in dependencies.dependencies){
+        for ((k, v) in dependencies.dependencies) {
             switchActivityIntent.putExtra(k, v)
         }
 
@@ -26,6 +35,8 @@ abstract class DoophieActivity<DependencyType: DoophieActivity.Dependency>: AppC
 
     interface Dependency{
         val dependencies: HashMap<String, String>
+
+
     }
 
     private val activityPrefs: SharedPreferences
@@ -34,6 +45,12 @@ abstract class DoophieActivity<DependencyType: DoophieActivity.Dependency>: AppC
     private val appPrefs: SharedPreferences
         get() { return applicationContext.getSharedPreferences("EfflePrefs", MODE_PRIVATE) }
 
+    /***
+     * Saves obj with the given key, applies the changes in background
+     * @param key the key of the obj
+     * @param obj the object
+     * @param private determines whether or not this key is accessible outside of this activity
+     */
     protected fun savePref(key: String, obj: Any, private: Boolean = false){
         val prefs = if (private) activityPrefs.edit() else appPrefs.edit()
         when (obj::class.java){
@@ -46,7 +63,13 @@ abstract class DoophieActivity<DependencyType: DoophieActivity.Dependency>: AppC
         prefs.apply()
     }
 
-    protected fun savePrefSafe(key: String, obj: Any, private: Boolean = false){
+    /***
+     * Saves obj with the given key, applies the changes immediately and is a blocking call
+     * @param key the key of the obj
+     * @param obj the object
+     * @param private determines whether or not this key is accessible outside of this activity
+     */
+    protected fun savePrefNow(key: String, obj: Any, private: Boolean = false){
         val prefs = if (private) activityPrefs.edit() else appPrefs.edit()
         when (obj::class.java){
             String::class.java -> prefs.putString(key, obj as String)
@@ -88,6 +111,12 @@ abstract class DoophieActivity<DependencyType: DoophieActivity.Dependency>: AppC
             return size.y
         }
 
+    class InvalidDependencyTypeException(
+            private val used: String, private val expected: String):
+            Exception(){
+        override val message: String?
+            get() = "Expected dependency type $expected, but found $used\nDependency type must share naming convention with Activity type."
+    }
 
     class InvalidPrefTypeException: Exception(){
         override val message: String?

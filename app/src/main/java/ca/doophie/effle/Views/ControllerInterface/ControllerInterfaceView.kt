@@ -3,10 +3,11 @@ package ca.doophie.effle.Views.ControllerInterface
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import ca.doophie.effle.Models.ViewModels.DoophieView
+import ca.doophie.doophrame.Models.ViewModels.DoophieView
+import ca.doophie.doophrame.UIObjects.Joystick
+import ca.doophie.doophrame.UIObjects.JoystickMovementCallbacks
 import ca.doophie.effle.R
-import ca.doophie.koju.UIObjects.Joystick
-import ca.doophie.koju.UIObjects.JoystickMovementCallbacks
+
 
 interface ControllerViewListener {
     fun handleJoystickMoved(strength: Double, angle: Double)
@@ -26,9 +27,9 @@ class ControllerView(context: Context, val listener: ControllerViewListener) : D
     }
 
     private fun buildJoystick(){
-        val joystick = Joystick(context, listener.screenWidth / 3, listener.screenHeight / 2)
+        val joystick = Joystick(context ?: return, listener.screenWidth / 3, listener.screenHeight / 2)
         rootView.addView(joystick)
-        joystick.movementCallbacks = object: JoystickMovementCallbacks{
+        joystick.movementCallbacks = object: JoystickMovementCallbacks {
             override fun joystickMoved(strength: Double, angle: Double) {
                 listener.handleJoystickMoved(strength, angle)
             }

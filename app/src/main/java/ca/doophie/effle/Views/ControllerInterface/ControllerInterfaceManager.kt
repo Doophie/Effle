@@ -1,8 +1,8 @@
 package ca.doophie.effle.Views.ControllerInterface
 
 import android.content.Context
-import ca.doophie.effle.Models.ViewModels.DoophieManager
-import ca.doophie.effle.Models.ViewModels.DoophieView
+import ca.doophie.doophrame.Models.ViewModels.DoophieManager
+import ca.doophie.doophrame.Models.ViewModels.DoophieView
 
 interface ControllerManagerListener {
     fun handleJoystickMoved(strength: Double, angle: Double)

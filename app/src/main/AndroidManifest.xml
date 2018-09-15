@@ -3,7 +3,7 @@
     package="ca.doophie.effle">
 
     <application
-        android:name=".DoophieApp"
+        android:name=".EffleApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

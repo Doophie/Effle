@@ -5,7 +5,7 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import ca.doophie.effle.Models.ViewModels.DoophieView
+import ca.doophie.doophrame.Models.ViewModels.DoophieView
 import ca.doophie.effle.R
 
 interface CharacterViewListener {

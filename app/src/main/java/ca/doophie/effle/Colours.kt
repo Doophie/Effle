@@ -1,4 +1,4 @@
-package ca.doophie.doophrame.Models
+package ca.doophie.effle
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -16,8 +16,8 @@ class Colours(context: Context){
         val accent: Int get() { return  mColours?.accent ?: -1 }
     }
 
-    var primary: Int = get(context, 0)
-    var accent: Int = get(context, 0)
+    var primary: Int = get(context, R.color.colorPrimary)
+    var accent: Int = get(context, R.color.colorAccent)
     var stealthBomber: Int = 0
 
     fun get(context: Context, colour: Int): Int{

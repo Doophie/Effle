@@ -10,7 +10,6 @@ import android.view.MotionEvent
 import android.view.SurfaceView
 import android.view.View
 import android.widget.FrameLayout
-import ca.doophie.doophrame.Models.Colours
 import java.lang.Math.atan2
 import kotlin.math.pow
 
@@ -48,8 +47,8 @@ class Joystick(context: Context, width: Int, height:  Int):
         layoutParams = FrameLayout.LayoutParams(width, height)
     }
 
-    private var padColor = Colours.primary
-    private var stickColor = Colours.accent
+    private var padColor = Color.BLACK
+    private var stickColor = Color.CYAN
 
     private val centerX = width / 2f
     private val centerY = height / 2f
@@ -73,7 +72,7 @@ class Joystick(context: Context, width: Int, height:  Int):
         val myCanvas = holder.lockCanvas()
         val color = Paint()
 
-        myCanvas.drawColor(ContextCompat.getColor(context, 0), PorterDuff.Mode.SRC_IN)
+        myCanvas.drawColor(0, PorterDuff.Mode.SRC_IN)
 
         // draw pad
         color.color = padColor

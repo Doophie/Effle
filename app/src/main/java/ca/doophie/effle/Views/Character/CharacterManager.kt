@@ -1,11 +1,9 @@
 package ca.doophie.effle.Views.Character
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import ca.doophie.effle.Models.Colours
-import ca.doophie.effle.Models.ViewModels.DoophieManager
-import ca.doophie.effle.Models.ViewModels.DoophieView
-import ca.doophie.effle.R
+import ca.doophie.doophrame.Models.ViewModels.DoophieManager
+import ca.doophie.doophrame.Models.ViewModels.DoophieView
+import ca.doophie.effle.Colours
 
 class CharacterManager: DoophieManager(),
 // Implements
