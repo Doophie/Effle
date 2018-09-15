@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ $# -eq 0 ]
+  then
+    echo "Invalid usage, must supple Android Studio directory."
+    echo "Usage: installDoophieTemplates [ANDROID_STUDIO_DIRECTORY] "
+else
+    cp /Templates/DoophieActivity $1/plugins/android/lib/templates/activities/
+fi

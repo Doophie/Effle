@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Point
 import android.support.v7.app.AppCompatActivity
+import ca.doophie.doophrame.extensions.putObject
 import ca.doophie.doophrame.models.ObjectSerializer
 import java.io.Serializable
 
@@ -23,17 +24,17 @@ abstract class DoophieActivity: AppCompatActivity() {
         }
 
         for ((k, v) in dependencies.dependencies) {
-            switchActivityIntent.putExtra(k, v)
+            switchActivityIntent.putObject(k, v)
         }
 
         startActivity(switchActivityIntent)
-        overridePendingTransition( animIn, animOut )
+        overridePendingTransition(animIn, animOut)
     }
 
     interface Dependency{
-        val dependencies: HashMap<String, String>
+        val dependencies: HashMap<String, Serializable>
 
-
+        class Keys
     }
 
     private val activityPrefs: SharedPreferences

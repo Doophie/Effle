@@ -1,0 +1,18 @@
+<template format="4"
+        revision="1"
+        name="Doophie Activity"
+        description="Creates a new DoophieActivity - DoophActivity and DoophieDependency">
+ 
+    <category value="Activity"/>
+ 
+    <parameter id="className"
+        name="Activity Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="Doophie"
+        help="The name of the activity"/>
+ 
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+ 
+</template>

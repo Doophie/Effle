@@ -5,10 +5,11 @@ import ca.doophie.doophrame.models.doophieActivityModel.DoophieActivity
 import ca.doophie.effle.Activities.AdventureActivity.AdventureDependency
 import ca.doophie.effle.R
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.Serializable
 
 class MainActivity : DoophieActivity() {
 
-    override val TAG: String = this::class.java.toString()
+    override val tag: String = this::class.java.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +22,7 @@ class MainActivity : DoophieActivity() {
     }
 
     class MainDependency: DoophieActivity.Dependency {
-        override val dependencies = HashMap<String, String>()
+        override val dependencies = HashMap<String, Serializable>()
     }
 
 }

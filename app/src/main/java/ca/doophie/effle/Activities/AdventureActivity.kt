@@ -8,11 +8,12 @@ import ca.doophie.effle.Views.ControllerInterface.ControllerManager
 import ca.doophie.effle.Views.ControllerInterface.ControllerManager.ControllerManagerDependency
 import ca.doophie.effle.Views.ControllerInterface.ControllerManagerListener
 import kotlinx.android.synthetic.main.activity_adventure.*
+import java.io.Serializable
 
 class AdventureActivity: DoophieActivity(), ControllerManagerListener {
 
     // required variables for distinguishing this activity and its dependencies
-    override val TAG: String = this::class.java.toString()
+    override val tag: String = this::class.java.toString()
 
     // Information about the players character
     var characterName = ""
@@ -65,9 +66,9 @@ class AdventureActivity: DoophieActivity(), ControllerManagerListener {
     class AdventureDependency(characterName: String): Dependency {
 
         // the dependencies variable holds all the objects needed by this activity
-        override val dependencies = HashMap<String, String>()
+        override val dependencies = HashMap<String, Serializable>()
 
-        // the companion object holds all the
+        // the companion object holds all the keys
         companion object {
             const val CHARACTER_NAME = "CharacterName"
         }

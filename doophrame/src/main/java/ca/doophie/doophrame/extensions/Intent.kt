@@ -4,6 +4,8 @@ import android.content.Intent
 import ca.doophie.doophrame.models.ObjectSerializer
 import java.io.Serializable
 
+// TODO: Handle encryption / decryption here
+
 fun <T: Serializable>Intent.getObject(key: String) : T? {
     return ObjectSerializer.deserialize(this.extras.getString(key))
 }
