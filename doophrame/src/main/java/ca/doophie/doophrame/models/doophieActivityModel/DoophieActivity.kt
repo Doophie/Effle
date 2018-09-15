@@ -3,21 +3,18 @@ package ca.doophie.doophrame.models.doophieActivityModel
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Point
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import ca.doophie.doophrame.models.ObjectSerializer
+import java.io.Serializable
 
 abstract class DoophieActivity: AppCompatActivity() {
 
-    abstract val TAG: String
+    abstract val tag: String
 
     protected open val animIn: Int = 0
     protected open val animOut: Int = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    protected inline fun switch(to: DoophieActivity, dependencies: Dependency){
+    protected fun switch(to: DoophieActivity, dependencies: Dependency){
         val switchActivityIntent = Intent(this, to::class.java)
 
         val depType = to::class.java.toString().split("Activity")[0]
@@ -40,7 +37,7 @@ abstract class DoophieActivity: AppCompatActivity() {
     }
 
     private val activityPrefs: SharedPreferences
-        get() { return applicationContext.getSharedPreferences(TAG, MODE_PRIVATE) }
+        get() { return applicationContext.getSharedPreferences(tag, MODE_PRIVATE) }
 
     private val appPrefs: SharedPreferences
         get() { return applicationContext.getSharedPreferences("EfflePrefs", MODE_PRIVATE) }
@@ -51,15 +48,9 @@ abstract class DoophieActivity: AppCompatActivity() {
      * @param obj the object
      * @param private determines whether or not this key is accessible outside of this activity
      */
-    protected fun savePref(key: String, obj: Any, private: Boolean = false){
+    protected fun savePref(key: String, obj: Serializable, private: Boolean = false){
         val prefs = if (private) activityPrefs.edit() else appPrefs.edit()
-        when (obj::class.java){
-            String::class.java -> prefs.putString(key, obj as String)
-            Int::class.java -> prefs.putInt(key, obj as Int)
-            Long::class.java -> prefs.putLong(key, obj as Long)
-            Boolean::class.java -> prefs.putBoolean(key, obj as Boolean)
-            else -> throw InvalidPrefTypeException()
-        }
+        prefs.putString(key, ObjectSerializer.serialize(obj))
         prefs.apply()
     }
 
@@ -69,29 +60,16 @@ abstract class DoophieActivity: AppCompatActivity() {
      * @param obj the object
      * @param private determines whether or not this key is accessible outside of this activity
      */
-    protected fun savePrefNow(key: String, obj: Any, private: Boolean = false){
+    protected fun savePrefNow(key: String, obj: Serializable, private: Boolean = false){
         val prefs = if (private) activityPrefs.edit() else appPrefs.edit()
-        when (obj::class.java){
-            String::class.java -> prefs.putString(key, obj as String)
-            Int::class.java -> prefs.putInt(key, obj as Int)
-            Long::class.java -> prefs.putLong(key, obj as Long)
-            Float::class.java -> prefs.putFloat(key, obj as Float)
-            Boolean::class.java -> prefs.putBoolean(key, obj as Boolean)
-            else -> throw InvalidPrefTypeException()
-        }
+        prefs.putString(key, ObjectSerializer.serialize(obj))
         prefs.commit()
     }
 
-    protected fun getPref(key: String, objType: Class<*>, private: Boolean = true): Any{
+
+    protected fun <T: Serializable>getPref(key: String, private: Boolean = true): T? {
         val prefs = if (private) activityPrefs else appPrefs
-        val obj = when (objType){
-            String::class.java -> prefs.getString(key, "")
-            Int::class.java -> prefs.getInt(key, 0)
-            Long::class.java -> prefs.getLong(key, 0)
-            Float::class.java -> prefs.getFloat(key, 0f)
-            Boolean::class.java -> prefs.getBoolean(key, false)
-            else -> throw InvalidPrefTypeException()
-        }
+        val obj = ObjectSerializer.deserialize<T>(prefs.getString(key, ""))
         return obj
     }
 
