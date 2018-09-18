@@ -10,7 +10,7 @@ abstract class DoophieManager{
 
     lateinit var parentViewRef: WeakReference<FrameLayout>
     private lateinit var rootViewRef: WeakReference<ViewGroup?>
-    private var doophieView: DoophieView? = null
+    var doophieView: DoophieView? = null
 
     val rootView: ViewGroup?
         get() { return rootViewRef.get() }
