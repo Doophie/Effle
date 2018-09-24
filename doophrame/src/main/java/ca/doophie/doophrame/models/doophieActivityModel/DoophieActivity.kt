@@ -15,6 +15,7 @@ abstract class DoophieActivity: AppCompatActivity() {
     protected open val animIn: Int = 0
     protected open val animOut: Int = 0
 
+    @Synchronized
     protected fun switch(to: DoophieActivity, dependencies: Dependency){
         val switchActivityIntent = Intent(this, to::class.java)
 
@@ -33,8 +34,6 @@ abstract class DoophieActivity: AppCompatActivity() {
 
     interface Dependency{
         val dependencies: HashMap<String, Serializable>
-
-        class Keys
     }
 
     private val activityPrefs: SharedPreferences
