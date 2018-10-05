@@ -7,6 +7,7 @@ import java.io.Serializable
 // TODO: Handle encryption / decryption here
 
 fun <T: Serializable>Intent.getObject(key: String) : T? {
+    if (this.extras == null) return null
     return ObjectSerializer.deserialize(this.extras.getString(key))
 }
 

@@ -21,7 +21,7 @@ class EnterShitActivity : DoophieActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entershit)
 
-        actionBar.title = "Enter some shit"
+        try { actionBar.title = "Enter some shit" } catch (_: Exception) {}
 
         // collect any objects from your dependency using the 
         // intent - as long as this activity was loaded with a switch call

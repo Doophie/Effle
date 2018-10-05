@@ -22,6 +22,7 @@ class ShitDisplayerManager(private val shit: Shit) : DoophieManager(),
         // do something
         for ((nuggetCount, nugget) in shit.nuggets.withIndex()){
             view.addShitNugget(nugget, nuggetCount)
+
         }
     }
 

@@ -22,6 +22,7 @@ class ShitDisplayerView(context: Context, val listener: ShitDisplayerViewListene
     fun addShitNugget(nugget: String, animDelay: Int){
         val nuggetHolder = TextView(context)
 
+
         nuggetHolder.text = nugget
 
         nuggetHolder.animation = AnimationUtils.loadAnimation(context, R.anim.slide_left)

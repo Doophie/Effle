@@ -3,6 +3,7 @@ package ca.doophie.effle.activities.displayShit;
 import android.os.Bundle
 import ca.doophie.doophrame.extensions.getObject
 import ca.doophie.doophrame.models.doophieActivityModel.DoophieActivity
+import ca.doophie.doophrame.models.viewModels.DoophieManager
 import ca.doophie.effle.R
 import ca.doophie.effle.activities.enterShit.EnterShitActivity
 import ca.doophie.effle.activities.enterShit.EnterShitDependency
@@ -10,6 +11,7 @@ import ca.doophie.effle.models.Shit
 import ca.doophie.effle.views.ShitDisplayerManager
 import kotlinx.android.synthetic.main.activity_displayshit.*
 import java.io.Serializable
+import java.lang.Exception
 
 class DisplayShitActivity : DoophieActivity() {
 
@@ -26,7 +28,7 @@ class DisplayShitActivity : DoophieActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_displayshit)
 
-        actionBar.title = "Here's the shit you've entered"
+        try { actionBar.title = "Here's the shit you've entered" } catch (_: Exception) {}
 
         // collect any objects from your dependency using the
         // intent - as long as this activity was loaded with a switch call
@@ -35,8 +37,11 @@ class DisplayShitActivity : DoophieActivity() {
 
         shitDisplayer = ShitDisplayerManager(shit)
 
-        shitDisplayer?.fillView(displayShit_rootView, applicationContext, R.anim.slide_left)
+        shitDisplayer?.fillView(displayShit_rootView, applicationContext, object: DoophieManager.DoophieManagerExitCallback() {
+            override fun exit(exitCode: Int) {
 
+            }
+        }, R.anim.slide_left)
     }
 
     override fun onBackPressed() {
