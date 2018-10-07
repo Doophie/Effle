@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package ca.doophie.doophrame.models
 
 import java.io.*
@@ -33,8 +35,8 @@ object ObjectSerializer {
             return null
         }
 
-        var bais = ByteArrayInputStream(string.toByteArray(charset("ISO-8859-1")))
-        var ois = ObjectInputStream(bais)
+        val bais = ByteArrayInputStream(string.toByteArray(charset("ISO-8859-1")))
+        val ois = ObjectInputStream(bais)
 
         return ois.readObject() as T
     }

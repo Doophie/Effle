@@ -17,10 +17,18 @@ interface JoystickMovementCallbacks {
     fun joystickMoved(strength: Double, angle: Double)
 }
 
+interface JoystickSelectionCallbacks {
+    fun itemSelected(index: Int)
+}
+
 class Joystick(context: Context, width: Int, height:  Int):
         SurfaceView(context), View.OnTouchListener {
 
     var movementCallbacks: JoystickMovementCallbacks? = null
+
+    var selectionCallbacks: JoystickSelectionCallbacks? = null
+    var selectionNumItems: Int = 360
+    private val selectionDiv: Int get() { return 360 / selectionNumItems }
 
     override fun onTouch(v: View?, e: MotionEvent?): Boolean {
         if(v?.equals(this) == true){
@@ -37,6 +45,15 @@ class Joystick(context: Context, width: Int, height:  Int):
                     drawJoystick(constrainedX, constrainedY)
                 }
             } else {
+                if (selectionCallbacks != null) {
+                    val displacement = Math.sqrt(Math.pow((e.x - centerX).toDouble(), 2.0)
+                            + Math.pow((e.y - centerY).toDouble(), 2.0)).toFloat()
+                    val ratio = baseRadius / displacement
+                    val constrainedX = centerX + (e.x - centerX) * ratio
+                    val constrainedY = centerY + (e.y - centerY) * ratio
+                    selectionCallbacks?.itemSelected((calculateAngle(constrainedX, constrainedY) / selectionDiv).toInt())
+                }
+
                 drawJoystick(centerX, centerY)
             }
         }

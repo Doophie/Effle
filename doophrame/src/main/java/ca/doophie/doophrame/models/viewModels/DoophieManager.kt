@@ -11,32 +11,16 @@ import kotlin.properties.Delegates
 
 abstract class DoophieManager{
 
-    abstract class DoophieManagerExitCallback: Observer {
-        override fun update(p0: java.util.Observable?, p1: Any?) {
-            exit(p1 as Int)
-        }
-
-        abstract fun exit(exitCode: Int)
-    }
-
-    val exitObservable = java.util.Observable()
-
-    lateinit var parentViewRef: WeakReference<FrameLayout>
+    private lateinit var parentViewRef: WeakReference<FrameLayout>
     private lateinit var rootViewRef: WeakReference<ViewGroup?>
     var doophieView: DoophieView? = null
-
-    var exit = -523
-        set(value) {
-            exitObservable.notifyObservers(value)
-            popView()
-        }
 
     val rootView: ViewGroup?
         get() { return rootViewRef.get() }
 
     abstract fun viewLoaded()
 
-    fun fillView(view: FrameLayout, context: Context, exit: DoophieManagerExitCallback, withAnimation: Int = -5) {
+    fun fillView(view: FrameLayout, context: Context, withAnimation: Int = -5) {
         parentViewRef = WeakReference(view)
         doophieView = makeRootView(context)
         doophieView?.addToParent(view)
@@ -46,8 +30,6 @@ abstract class DoophieManager{
         doophieView?.setUpListeners()
 
         viewLoaded()
-
-        exitObservable.addObserver(exit)
     }
 
     abstract fun makeRootView(context: Context): DoophieView
