@@ -19,8 +19,8 @@ buildscript {
 
 ext {
     // ValidateTor Library Info
-    libVersionCode = 5
-    libVersionName = '1.0.6'
+    libVersionCode = 6
+    libVersionName = '1.0.7'
 
     libPomUrl = 'https://github.com/doophie/Effle'
     libGithubRepo = 'doophie/Effle'

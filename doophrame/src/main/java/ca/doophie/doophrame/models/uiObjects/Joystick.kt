@@ -10,7 +10,9 @@ import android.view.MotionEvent
 import android.view.SurfaceView
 import android.view.View
 import android.widget.FrameLayout
+import java.lang.Exception
 import java.lang.Math.atan2
+import java.util.logging.Handler
 import kotlin.math.pow
 
 interface JoystickMovementCallbacks {
@@ -79,6 +81,9 @@ class Joystick(context: Context, width: Int, height:  Int):
         this.setBackgroundColor(Color.TRANSPARENT)
         this.setZOrderOnTop(true)
         holder.setFormat(PixelFormat.TRANSPARENT)
+        android.os.Handler().postDelayed({
+            reset()
+        }, 100)
     }
 
     fun reset(){
@@ -86,21 +91,23 @@ class Joystick(context: Context, width: Int, height:  Int):
     }
 
     private fun drawJoystick(newX: Float, newY: Float){
-        val myCanvas = holder.lockCanvas()
-        val color = Paint()
+        try {
+            val myCanvas = holder.lockCanvas()
+            val color = Paint()
 
-        myCanvas.drawColor(0, PorterDuff.Mode.SRC_IN)
+            myCanvas.drawColor(0, PorterDuff.Mode.SRC_IN)
 
-        // draw pad
-        color.color = padColor
-        myCanvas.drawCircle(centerX, centerY, baseRadius, color)
+            // draw pad
+            color.color = padColor
+            myCanvas.drawCircle(centerX, centerY, baseRadius, color)
 
-        // draw stick
-        color.color = stickColor
-        myCanvas.drawCircle(newX, newY, hatRadius, color)
+            // draw stick
+            color.color = stickColor
+            myCanvas.drawCircle(newX, newY, hatRadius, color)
 
-        holder.unlockCanvasAndPost(myCanvas)
-        movementCallbacks?.joystickMoved(calculateStrength(newX, newY), calculateAngle(newX, newY))
+            holder.unlockCanvasAndPost(myCanvas)
+            movementCallbacks?.joystickMoved(calculateStrength(newX, newY), calculateAngle(newX, newY))
+        } catch (e: Exception) { }
     }
 
     private fun calculateAngle(x2: Float, y2: Float): Double {

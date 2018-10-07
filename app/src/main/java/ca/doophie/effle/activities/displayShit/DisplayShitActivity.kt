@@ -37,11 +37,7 @@ class DisplayShitActivity : DoophieActivity() {
 
         shitDisplayer = ShitDisplayerManager(shit)
 
-        shitDisplayer?.fillView(displayShit_rootView, applicationContext, object: DoophieManager.DoophieManagerExitCallback() {
-            override fun exit(exitCode: Int) {
-
-            }
-        }, R.anim.slide_left)
+        shitDisplayer?.fillView(displayShit_rootView, applicationContext, R.anim.slide_left)
     }
 
     override fun onBackPressed() {
