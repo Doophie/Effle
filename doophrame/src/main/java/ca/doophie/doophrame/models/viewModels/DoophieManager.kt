@@ -34,7 +34,10 @@ abstract class DoophieManager{
 
     abstract fun makeRootView(context: Context): DoophieView
 
+    open fun onDetach() {}
+
     fun popView(){
+        onDetach()
         parentViewRef.get()?.removeView(doophieView?.rootView)
         doophieView = null
     }
