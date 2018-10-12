@@ -12,7 +12,9 @@ import kotlin.properties.Delegates
 abstract class DoophieManager{
 
     private lateinit var parentViewRef: WeakReference<FrameLayout>
-    var frame: FrameLayout? = parentViewRef.get()
+    val frame: FrameLayout?
+        get() { return parentViewRef.get() }
+
     private lateinit var rootViewRef: WeakReference<ViewGroup?>
     var doophieView: DoophieView? = null
 
