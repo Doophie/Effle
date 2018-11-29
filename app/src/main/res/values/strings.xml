@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Effle</string>
+    <string name="swap_activity">Swap</string>
+    <string name="new_kind_of_string">New Kind of Activity</string>
+    <string name="random_text">Random Text: %d</string>
+    <string name="open_view">Open View</string>
 
 </resources>

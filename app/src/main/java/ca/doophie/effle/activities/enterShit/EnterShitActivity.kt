@@ -5,6 +5,8 @@ import ca.doophie.doophrame.models.doophieActivityModel.DoophieActivity
 import ca.doophie.effle.R
 import ca.doophie.effle.activities.displayShit.DisplayShitActivity
 import ca.doophie.effle.activities.displayShit.DisplayShitDependency
+import ca.doophie.effle.activities.newKindOfActivity.NewKindOfActivity
+import ca.doophie.effle.activities.newKindOfActivity.NewKindOfTraveller
 import ca.doophie.effle.models.Shit
 import kotlinx.android.synthetic.main.activity_entershit.*
 
@@ -34,7 +36,7 @@ class EnterShitActivity : DoophieActivity() {
         }
 
         button_viewShit.setOnClickListener {
-            switch(DisplayShitActivity(), DisplayShitDependency(shit))
+            NewKindOfTraveller()
         }
     }
 
