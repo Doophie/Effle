@@ -4,5 +4,6 @@
     <string name="new_kind_of_string">New Kind of Activity</string>
     <string name="random_text">Random Text: %d</string>
     <string name="open_view">Open View</string>
+    <string name="color_set_to_color">Color set to: %s</string>
 
 </resources>

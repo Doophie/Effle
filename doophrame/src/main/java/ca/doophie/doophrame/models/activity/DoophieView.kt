@@ -6,33 +6,39 @@ import android.graphics.Point
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import ca.doophie.doophrame.models.ObjectSerializer
 import ca.doophie.doophrame.models.activity.DoophieTraveller.Companion.DOOPHIE_TRAVELLER
 import java.io.Serializable
 
-abstract class DoophieView(context: Context): View(context) {
+abstract class DoophieView(context: Context) :
+        FrameLayout(context, null, 0) {
 
     abstract val layout: Int
 
     abstract val tag: String
 
+    var view: View? = null
+
+    fun lateInit(parent: ViewGroup) {
+        parent.addView(this)
+        view = LayoutInflater.from(context).inflate(layout, null)
+        this.addView(view)
+        Log.d(tag, "Attached view")
+        traveller?.view = this
+    }
+
     private var traveller: DoophieTravellable? = null
 
     var dependencies: Bundle? = null
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
-        // ...
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {}
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         traveller = dependencies?.get(DOOPHIE_TRAVELLER) as DoophieTravellable?
-        traveller?.view = this
     }
 
     private val viewPrefs: SharedPreferences

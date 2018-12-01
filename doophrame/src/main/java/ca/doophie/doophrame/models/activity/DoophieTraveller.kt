@@ -3,6 +3,7 @@ package ca.doophie.doophrame.models.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.view.ViewGroup
 import ca.doophie.doophrame.extensions.putObject
 import java.io.Serializable
 import java.lang.ref.WeakReference
@@ -11,10 +12,10 @@ interface DoophieTravellable: Serializable {
     var activity: DoophieActivity?
     var view: DoophieView?
     fun switch(to: DoophieTraveller, dependencies: DoophieTraveller.Dependency)
-    fun present(to: DoophieTraveller, dependencies: DoophieTraveller.Dependency, inView: View)
+    fun present(to: DoophieTraveller, dependencies: DoophieTraveller.Dependency, inView: ViewGroup)
 }
 
-abstract class DoophieTraveller(view: DoophieView? = null): DoophieTravellable {
+abstract class DoophieTraveller: DoophieTravellable {
 
     companion object {
         const val DOOPHIE_TRAVELLER = "AEFNAUWGWYVTUBYINULMLKJNHBGVFCYVGJBHKANJGMRKSSHBEYFKEUCINMWINRHG"
@@ -22,7 +23,7 @@ abstract class DoophieTraveller(view: DoophieView? = null): DoophieTravellable {
 
     abstract val activityClass: Class<*>
 
-    private var hasStarted: Boolean = true
+    private var hasStarted: Boolean = false
 
     @Transient
     private var __activityRef: WeakReference<DoophieActivity?>? = null
@@ -74,7 +75,7 @@ abstract class DoophieTraveller(view: DoophieView? = null): DoophieTravellable {
     }
 
     @Synchronized
-    override fun present(to: DoophieTraveller, dependencies: Dependency, inView: View) {
+    override fun present(to: DoophieTraveller, dependencies: Dependency, inView: ViewGroup) {
         val context = activity?.applicationContext ?: view?.context ?: return
 
         val viewIntent = Intent(context, to.activityClass)
@@ -85,16 +86,13 @@ abstract class DoophieTraveller(view: DoophieView? = null): DoophieTravellable {
             viewIntent.putObject(k, v)
         }
 
+        to.view?.lateInit(inView)
+
         to.view?.dependencies = viewIntent.extras
 
     }
 
     interface Dependency{
         val dependencies: HashMap<String, Serializable>
-    }
-
-    init {
-        this.view = view
-        hasStarted = false
     }
 }

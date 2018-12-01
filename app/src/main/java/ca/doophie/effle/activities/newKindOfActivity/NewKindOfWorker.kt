@@ -22,7 +22,7 @@ class NewKindOfWorker: DoophieWorker(), NewKindOfActivityCallbacks {
     // Activity callbacks
     override fun openNewView() {
         val viewHolder: FrameLayout = activity?.findViewById(R.id.newKindOfViewHolder) ?: return
-        traveller.present(NewKindOfViewTraveller(NewKindOfView(viewHolder.context, viewHolder)), NewKindOfViewDependency(), viewHolder)
+        traveller.present(NewKindOfViewTraveller(viewHolder.context), NewKindOfViewDependency(), viewHolder)
     }
 
 }
