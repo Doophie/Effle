@@ -40,7 +40,9 @@ abstract class DoophieActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(layout)
         dependencies = intent
-        traveller = dependencies?.getObject(DOOPHIE_TRAVELLER) as? DoophieTravellable?
+        traveller = try {
+            dependencies?.getObject(DOOPHIE_TRAVELLER) as? DoophieTravellable?
+        } catch (e: java.lang.Exception) { null }
 
         if (traveller == null) {
             initAsRoot()
