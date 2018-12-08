@@ -51,8 +51,8 @@ abstract class DoophieTraveller: DoophieTravellable {
             }
         }
 
-    protected abstract val animIn: Int
-    protected abstract val animOut: Int
+    abstract var animIn: Int
+    abstract var animOut: Int
 
     abstract val worker: DoophieWorker
 
