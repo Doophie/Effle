@@ -12,8 +12,8 @@ class NewKindOfViewTraveller(context: Context): DoophieTraveller() {
 
     override val activityClass: Class<*> = NewKindOfView::class.java
 
-    override val animIn: Int = R.anim.fade_in
-    override val animOut: Int = R.anim.fade_out
+    override var animIn: Int = R.anim.fade_in
+    override var animOut: Int = R.anim.fade_out
 
     override val worker: DoophieWorker = NewKindOfViewWorker()
 

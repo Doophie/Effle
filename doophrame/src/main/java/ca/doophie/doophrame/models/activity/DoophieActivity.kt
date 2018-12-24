@@ -120,8 +120,8 @@ abstract class DoophieActivity: AppCompatActivity() {
 
 class BaseTraveller: DoophieTraveller() {
     override val activityClass: Class<*> = DoophieActivity::class.java
-    override val animIn: Int = R.anim.fade_in
-    override val animOut: Int = R.anim.fade_out
+    override var animIn: Int = R.anim.fade_in
+    override var animOut: Int = R.anim.fade_out
     override val worker: DoophieWorker = BaseWorker()
 
     init {

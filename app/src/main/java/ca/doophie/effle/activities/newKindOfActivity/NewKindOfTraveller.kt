@@ -9,8 +9,8 @@ class NewKindOfTraveller: DoophieTraveller() {
 
     override val activityClass: Class<*> = NewKindOfActivity::class.java
 
-    override val animIn: Int = R.anim.slide_right
-    override val animOut: Int = R.anim.slide_out_right
+    override var animIn: Int = R.anim.slide_right
+    override var animOut: Int = R.anim.slide_out_right
 
     override val worker: DoophieWorker = NewKindOfWorker()
 
