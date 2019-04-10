@@ -64,9 +64,15 @@ abstract class DoophieActivity: AppCompatActivity() {
      * @param obj the object
      * @param private determines whether or not this key is accessible outside of this activity
      */
-    protected fun savePref(key: String, obj: Serializable, private: Boolean = false){
+    protected fun savePref(key: String, obj: Serializable?, private: Boolean = false){
         val prefs = if (private) activityPrefs.edit() else appPrefs.edit()
-        prefs.putString(key, ObjectSerializer.serialize(obj))
+
+        if (obj == null) {
+            prefs.remove(key)
+        } else {
+            prefs.putString(key, ObjectSerializer.serialize(obj))
+        }
+
         prefs.apply()
     }
 
@@ -76,9 +82,15 @@ abstract class DoophieActivity: AppCompatActivity() {
      * @param obj the object
      * @param private determines whether or not this key is accessible outside of this activity
      */
-    protected fun savePrefNow(key: String, obj: Serializable, private: Boolean = false){
+    protected fun savePrefNow(key: String, obj: Serializable?, private: Boolean = false){
         val prefs = if (private) activityPrefs.edit() else appPrefs.edit()
-        prefs.putString(key, ObjectSerializer.serialize(obj))
+
+        if (obj == null) {
+            prefs.remove(key)
+        } else {
+            prefs.putString(key, ObjectSerializer.serialize(obj))
+        }
+
         prefs.commit()
     }
 

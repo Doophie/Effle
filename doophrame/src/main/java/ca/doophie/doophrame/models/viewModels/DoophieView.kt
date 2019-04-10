@@ -1,27 +1,25 @@
 package ca.doophie.doophrame.models.viewModels
 
 import android.content.Context
+import android.util.AttributeSet
+import android.view.FrameMetrics
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
+import android.widget.FrameLayout
 import java.lang.ref.WeakReference
 
-open class DoophieView(context: Context) {
+abstract class DoophieView(context: Context, attrs: AttributeSet): FrameLayout(context, attrs) {
 
-    open val rootView: ViewGroup? = null // inflate this as a layout
-    private val contextRef = WeakReference<Context>(context)
-    val context: Context? get() { return contextRef.get() }
+    abstract val layoutID: Int
 
-    var animation: Animation?
-        get() { return rootView?.animation }
-        set(value) { rootView?.animation = value }
+    val contentView: ViewGroup
 
-    fun animate() {
-        rootView?.animate()
+    init {
+        contentView = LayoutInflater.from(context).inflate(layoutID, null, false) as ViewGroup
+
+        this.addView(contentView)
     }
 
-    fun addToParent(parentView: ViewGroup){
-        parentView.addView(rootView)
-    }
-
-    open fun setUpListeners() {}
 }
