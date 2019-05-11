@@ -4,13 +4,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Point
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import ca.doophie.doophrame.R
 import ca.doophie.doophrame.extensions.getObject
-import ca.doophie.doophrame.extensions.putObject
-import ca.doophie.doophrame.models.ObjectSerializer
+import ca.doophie.doophrame.models.DoophieObjectSerializer
 import ca.doophie.doophrame.models.activity.DoophieTraveller.Companion.DOOPHIE_TRAVELLER
 import java.io.Serializable
 
@@ -64,13 +62,13 @@ abstract class DoophieActivity: AppCompatActivity() {
      * @param obj the object
      * @param private determines whether or not this key is accessible outside of this activity
      */
-    protected fun savePref(key: String, obj: Serializable?, private: Boolean = false){
+    protected fun savePref(key: String, obj: Serializable?, private: Boolean = true){
         val prefs = if (private) activityPrefs.edit() else appPrefs.edit()
 
         if (obj == null) {
             prefs.remove(key)
         } else {
-            prefs.putString(key, ObjectSerializer.serialize(obj))
+            prefs.putString(key, DoophieObjectSerializer.serialize(obj))
         }
 
         prefs.apply()
@@ -82,13 +80,13 @@ abstract class DoophieActivity: AppCompatActivity() {
      * @param obj the object
      * @param private determines whether or not this key is accessible outside of this activity
      */
-    protected fun savePrefNow(key: String, obj: Serializable?, private: Boolean = false){
+    protected fun savePrefNow(key: String, obj: Serializable?, private: Boolean = true){
         val prefs = if (private) activityPrefs.edit() else appPrefs.edit()
 
         if (obj == null) {
             prefs.remove(key)
         } else {
-            prefs.putString(key, ObjectSerializer.serialize(obj))
+            prefs.putString(key, DoophieObjectSerializer.serialize(obj))
         }
 
         prefs.commit()
@@ -97,7 +95,7 @@ abstract class DoophieActivity: AppCompatActivity() {
 
     protected fun <T: Serializable>getPref(key: String, private: Boolean = true): T? {
         val prefs = if (private) activityPrefs else appPrefs
-        val obj = ObjectSerializer.deserialize<T>(prefs.getString(key, ""))
+        val obj = DoophieObjectSerializer.deserialize<T>(prefs.getString(key, ""))
         return obj
     }
 
