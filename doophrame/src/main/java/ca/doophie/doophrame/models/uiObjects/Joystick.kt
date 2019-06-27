@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.graphics.PorterDuff
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.MotionEvent
 import android.view.SurfaceView
 import android.view.View
